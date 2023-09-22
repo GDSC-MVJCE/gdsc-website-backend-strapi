@@ -13,6 +13,7 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.13.7",
     "@strapi/plugin-users-permissions": "4.13.7",
+    "@strapi/provider-upload-cloudinary": "^4.13.7",
     "@strapi/strapi": "4.13.7",
     "mysql": "2.18.1",
     "mysql2": "^3.6.1"
