@@ -25,7 +25,8 @@
       "inversedBy": "blogs"
     },
     "shortDescription": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "thumbnail": {
       "type": "media",
@@ -50,11 +51,13 @@
       ]
     },
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "blog_tags": {
       "type": "relation",

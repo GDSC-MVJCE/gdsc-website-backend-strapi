@@ -695,11 +695,11 @@ export interface ApiBlogBlog extends Schema.CollectionType {
       'manyToOne',
       'api::profile.profile'
     >;
-    shortDescription: Attribute.Text;
+    shortDescription: Attribute.Text & Attribute.Required;
     thumbnail: Attribute.Media;
     bannerImage: Attribute.Media;
-    content: Attribute.RichText;
-    slug: Attribute.UID<'api::blog.blog', 'title'>;
+    content: Attribute.RichText & Attribute.Required;
+    slug: Attribute.UID<'api::blog.blog', 'title'> & Attribute.Required;
     blog_tags: Attribute.Relation<
       'api::blog.blog',
       'manyToMany',
@@ -721,13 +721,14 @@ export interface ApiBlogTagBlogTag extends Schema.CollectionType {
     singularName: 'blog-tag';
     pluralName: 'blog-tags';
     displayName: 'BlogTag';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    label: Attribute.String;
-    slug: Attribute.UID<'api::blog-tag.blog-tag', 'label'>;
+    label: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::blog-tag.blog-tag', 'label'> & Attribute.Required;
     blogs: Attribute.Relation<
       'api::blog-tag.blog-tag',
       'manyToMany',
@@ -763,11 +764,12 @@ export interface ApiProfileProfile extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    name: Attribute.String;
-    username: Attribute.UID<'api::profile.profile', 'name'>;
-    bio: Attribute.Text;
+    name: Attribute.String & Attribute.Required;
+    username: Attribute.UID<'api::profile.profile', 'name'> &
+      Attribute.Required;
+    bio: Attribute.Text & Attribute.Required;
     about: Attribute.Text;
-    image: Attribute.Media;
+    image: Attribute.Media & Attribute.Required;
     coverPhoto: Attribute.Media;
     blogs: Attribute.Relation<
       'api::profile.profile',
@@ -791,6 +793,29 @@ export interface ApiProfileProfile extends Schema.CollectionType {
   };
 }
 
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'Team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::team.team', 'Name'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Shared {
     export interface ContentTypes {
@@ -810,6 +835,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
       'api::profile.profile': ApiProfileProfile;
+      'api::team.team': ApiTeamTeam;
     }
   }
 }
