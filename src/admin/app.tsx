@@ -1,5 +1,10 @@
 export default {
   config: {
+    translatations: {
+      en: {
+        'app.components.LeftMenu.navbrand.title': 'GDSC MVJCE Dashboard',
+      }
+    },
     locales: [
       // 'ar',
       // 'fr',

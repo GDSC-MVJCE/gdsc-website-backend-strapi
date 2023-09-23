@@ -752,6 +752,51 @@ export interface ApiBlogTagBlogTag extends Schema.CollectionType {
   };
 }
 
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText & Attribute.Required;
+    shortDescription: Attribute.Text;
+    thumbnail: Attribute.Media;
+    coverPhoto: Attribute.Media;
+    startDate: Attribute.Date;
+    endDate: Attribute.Date;
+    slug: Attribute.UID<'api::event.event', 'title'>;
+    venue: Attribute.String & Attribute.Required;
+    status: Attribute.Enumeration<['upcoming', 'completed']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'upcoming'>;
+    registrationLink: Attribute.String & Attribute.Required;
+    speakers: Attribute.Component<'member.speaker', true>;
+    schedule: Attribute.Component<'event.schedule-card', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProfileProfile extends Schema.CollectionType {
   collectionName: 'profiles';
   info: {
@@ -838,6 +883,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::blog.blog': ApiBlogBlog;
       'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
+      'api::event.event': ApiEventEvent;
       'api::profile.profile': ApiProfileProfile;
       'api::team.team': ApiTeamTeam;
     }

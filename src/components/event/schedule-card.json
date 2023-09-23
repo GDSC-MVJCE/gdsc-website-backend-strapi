@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_event_schedule_cards",
+  "info": {
+    "displayName": "ScheduleCard",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "startTime": {
+      "type": "time"
+    },
+    "endTime": {
+      "type": "time"
+    },
+    "date": {
+      "type": "datetime"
+    }
+  }
+}
