@@ -779,6 +779,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
     registrationLink: Attribute.String & Attribute.Required;
     speakers: Attribute.Component<'member.speaker', true>;
     schedule: Attribute.Component<'event.schedule-card', true>;
+    event_tags: Attribute.Relation<
+      'api::event.event',
+      'manyToMany',
+      'api::event-tag.event-tag'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -790,6 +795,43 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventTagEventTag extends Schema.CollectionType {
+  collectionName: 'event_tags';
+  info: {
+    singularName: 'event-tag';
+    pluralName: 'event-tags';
+    displayName: 'EventTag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::event-tag.event-tag', 'label'> &
+      Attribute.Required;
+    events: Attribute.Relation<
+      'api::event-tag.event-tag',
+      'manyToMany',
+      'api::event.event'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-tag.event-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-tag.event-tag',
       'oneToOne',
       'admin::user'
     > &
@@ -884,6 +926,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
       'api::event.event': ApiEventEvent;
+      'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::profile.profile': ApiProfileProfile;
       'api::team.team': ApiTeamTeam;
     }
