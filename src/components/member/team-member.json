@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_member_team_members",
+  "info": {
+    "displayName": "TeamMember",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::profile.profile"
+    },
+    "Role": {
+      "type": "string",
+      "required": true
+    },
+    "priority": {
+      "type": "integer"
+    }
+  }
+}

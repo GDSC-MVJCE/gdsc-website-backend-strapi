@@ -799,6 +799,7 @@ export interface ApiTeamTeam extends Schema.CollectionType {
     singularName: 'team';
     pluralName: 'teams';
     displayName: 'Team';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -806,6 +807,9 @@ export interface ApiTeamTeam extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String & Attribute.Required;
     slug: Attribute.UID<'api::team.team', 'Name'> & Attribute.Required;
+    core: Attribute.Component<'member.team-member', true>;
+    lead: Attribute.Component<'member.team-member'>;
+    members: Attribute.Component<'member.team-member', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

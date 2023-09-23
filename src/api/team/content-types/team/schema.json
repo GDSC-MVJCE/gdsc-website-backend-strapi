@@ -4,7 +4,8 @@
   "info": {
     "singularName": "team",
     "pluralName": "teams",
-    "displayName": "Team"
+    "displayName": "Team",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,21 @@
       "type": "uid",
       "targetField": "Name",
       "required": true
+    },
+    "core": {
+      "type": "component",
+      "repeatable": true,
+      "component": "member.team-member"
+    },
+    "lead": {
+      "type": "component",
+      "repeatable": false,
+      "component": "member.team-member"
+    },
+    "members": {
+      "type": "component",
+      "repeatable": true,
+      "component": "member.team-member"
     }
   }
 }
