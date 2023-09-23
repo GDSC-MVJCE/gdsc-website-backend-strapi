@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "recruitments",
+  "info": {
+    "singularName": "recruitment",
+    "pluralName": "recruitments",
+    "displayName": "recruitment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "isOpen": {
+      "type": "boolean",
+      "required": true
+    },
+    "formLink": {
+      "type": "string"
+    }
+  }
+}

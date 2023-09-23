@@ -880,6 +880,37 @@ export interface ApiProfileProfile extends Schema.CollectionType {
   };
 }
 
+export interface ApiRecruitmentRecruitment extends Schema.SingleType {
+  collectionName: 'recruitments';
+  info: {
+    singularName: 'recruitment';
+    pluralName: 'recruitments';
+    displayName: 'recruitment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    isOpen: Attribute.Boolean & Attribute.Required;
+    formLink: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::recruitment.recruitment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::recruitment.recruitment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTeamTeam extends Schema.CollectionType {
   collectionName: 'teams';
   info: {
@@ -928,6 +959,7 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::event-tag.event-tag': ApiEventTagEventTag;
       'api::profile.profile': ApiProfileProfile;
+      'api::recruitment.recruitment': ApiRecruitmentRecruitment;
       'api::team.team': ApiTeamTeam;
     }
   }
